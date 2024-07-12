@@ -1,31 +1,17 @@
 object StringFormatter {
+  def toUpper(str: String): String = str.toUpperCase
 
-  def toUpper(input: String): String = {
-    input.toUpperCase
-  }
+  def toLower(str: String): String = str.toLowerCase
 
-  def toLower(input: String): String = {
-    input.toLowerCase
-  }
-
-  def formatNames(name: String)(formatFunction: String => String): String = {
-    formatFunction(name)
-  }
+  def formatNames(name: String)(formatFunc: String => String): String = formatFunc(name)
 
   def main(args: Array[String]): Unit = {
     val names = List("Benny", "Niroshan", "Saman", "Kumara")
-    
 
-    val formattedNames = names.zipWithIndex.map {
-      case (name, index) => 
-        index match {
-          case 0 => formatNames(name)(toUpper)
-          case 1 => formatNames(name)(n => n.substring(0, 2).toUpperCase + n.substring(2).toLowerCase)
-          case 2 => formatNames(name)(toLower)
-          case 3 => formatNames(name)(n => n.substring(0, n.length - 1).toLowerCase + n.last.toUpper)
-        }
-    }
     
-    formattedNames.foreach(println)
+    println(formatNames(names(0))(toUpper))                
+    println(formatNames(names(1))(name => name.substring(0, 2).toUpperCase + name.substring(2))) 
+    println(formatNames(names(2))(toLower))                
+    println(formatNames(names(3))(name => name.substring(0, name.length - 1) + name.last.toUpper)) 
   }
 }
